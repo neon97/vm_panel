@@ -182,7 +182,7 @@ class _DashboardState extends State<Dashboard> {
                 width: mainList,
                 child: Scaffold(
                   appBar: AppBar(
-                    title: Text("Cheker"),
+                    title: Text("Dashboard",style: TextStyle(color: Colors.black),),
                     backgroundColor: Colors.white,
                     elevation: 1.0,
                     actions: <Widget>[
@@ -227,11 +227,17 @@ class _DashboardState extends State<Dashboard> {
                         onPressed: () {},
                       ),
                       Padding(
-                        padding: EdgeInsets.only(right: 10.0),
+                        padding: EdgeInsets.all(10.0),
                         child: CircleAvatar(
+                          maxRadius: 18.0,
+                          backgroundColor: Colors.green,
+                          child: CircleAvatar(
+                          backgroundImage: NetworkImage("https://www.biography.com/.image/t_share/MTQ3NjM5ODU2MjA4NTUzMzQ4/iggy_azalea_photo_by_axeell_bauer-griffin_filmmagic_getty_469331242.jpg"),
                           maxRadius: 15.0,
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.white,
+                          
                         ),
+                        )
                       )
                     ],
                   ),
@@ -255,7 +261,7 @@ class _DashboardState extends State<Dashboard> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    "Welcome to Spencer",
+                                    "Welcome Iggy azalea",
                                     style: TextStyle(fontSize: 20.0),
                                   ),
                                   Text(
@@ -285,15 +291,39 @@ class _DashboardState extends State<Dashboard> {
                             width: mainList,
                             child: Row(
                               children: <Widget>[
-                                topCountCard(context, (mainList - 104) / 3,Colors.deepOrange,Icon(Icons.people,color: Colors.white,size: 20.0,)),
-                                SizedBox(  
-                                  width: 20.0,
-                                ),
-                                topCountCard(context, (mainList - 104) / 3,Colors.green,Icon(Icons.mail,color: Colors.white,size: 20.0,)),
+                                topCountCard(
+                                    context,
+                                    (mainList - 104) / 3,
+                                    Colors.deepOrange,
+                                    Icon(Icons.people,
+                                        color: Colors.white, size: 20.0),
+                                    "625"),
                                 SizedBox(
                                   width: 20.0,
                                 ),
-                                topCountCard(context, (mainList - 104) / 3,Colors.blue,Icon(Icons.home,color: Colors.white,size: 20.0,)),
+                                topCountCard(
+                                    context,
+                                    (mainList - 104) / 3,
+                                    Colors.green,
+                                    Icon(
+                                      Icons.mail,
+                                      color: Colors.white,
+                                      size: 20.0,
+                                    ),
+                                    "332"),
+                                SizedBox(
+                                  width: 20.0,
+                                ),
+                                topCountCard(
+                                    context,
+                                    (mainList - 104) / 3,
+                                    Colors.blue,
+                                    Icon(
+                                      Icons.home,
+                                      color: Colors.white,
+                                      size: 20.0,
+                                    ),
+                                    "265"),
                               ],
                             )),
 
@@ -342,7 +372,8 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Widget topCountCard(BuildContext context, double size,Color colore,Icon icone) {
+  Widget topCountCard(BuildContext context, double size, Color colore,
+      Icon icone, String count) {
     return Card(
       elevation: 0.0,
       child: Container(
@@ -354,9 +385,34 @@ class _DashboardState extends State<Dashboard> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             CircleAvatar(
-              maxRadius: 22.0,
-              backgroundColor: colore,
-              child: icone
+                maxRadius: 22.0, backgroundColor: colore, child: icone),
+            SizedBox(
+              width: 10.0,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text(
+                      count,
+                      style: TextStyle(fontSize: 25.0),
+                    ),
+                    SizedBox(
+                      width: 5.0,
+                    ),
+                    Text(
+                      "Projects",
+                      style: TextStyle(fontSize: 13.0),
+                    )
+                  ],
+                ),
+                Text(
+                  "33 New Proposal to it !!",
+                  style: TextStyle(color: Colors.grey, fontSize: 10.0),
+                )
+              ],
             )
           ],
         ),
@@ -371,6 +427,54 @@ class _DashboardState extends State<Dashboard> {
         height: 250.0,
         width: size,
         color: Colors.white,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                height: 50.0,
+                width: size,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Projects monitor",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Divider(
+                          color: Colors.transparent,
+                          height: 2.0,
+                        ),
+                        Text(
+                          "Calculated in last 30 Days",
+                          style: TextStyle(color: Colors.grey, fontSize: 10.0),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.sync,
+                          size: 18.0,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Icon(
+                          Icons.menu,
+                          size: 18.0,
+                        )
+                      ],
+                    )
+                  ],
+                ))
+          ],
+        ),
       ),
     );
   }
