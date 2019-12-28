@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class Dashboard extends StatefulWidget {
   @override
@@ -6,6 +10,35 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  _launchURL() async {
+    const url = 'https://flutter.dev';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  // @override
+  // void initState() { 
+  //   super.initState();
+  //   this.getCategory();
+  // }
+
+  // //getCategory
+  // List category = List();
+  // void getCategory() async {
+  //   var res = await http.get(
+  //       Uri.encodeFull(
+  //           "http://uk.integritydigital.in/api/GetExpenseCategory/GetExpenseCategory"),
+  //       headers: {"Accept": "application/json"});
+  //   var resBody = json.decode(res.body);
+  //   setState(() {
+  //     category = resBody;
+  //   });
+  //   print(category);
+  // }
+
   @override
   Widget build(BuildContext context) {
     double screenSize = MediaQuery.of(context).size.width;
@@ -31,7 +64,12 @@ class _DashboardState extends State<Dashboard> {
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0),
                       ),
-                      leading: FlutterLogo(),
+                      leading: GestureDetector(
+                        child: FlutterLogo(),
+                        onTap: () {
+                          _launchURL();
+                        },
+                      ),
                     ),
                     Divider(
                       color: Colors.transparent,
@@ -182,7 +220,10 @@ class _DashboardState extends State<Dashboard> {
                 width: mainList,
                 child: Scaffold(
                   appBar: AppBar(
-                    title: Text("Dashboard",style: TextStyle(color: Colors.black),),
+                    title: Text(
+                      "Dashboard",
+                      style: TextStyle(color: Colors.black),
+                    ),
                     backgroundColor: Colors.white,
                     elevation: 1.0,
                     actions: <Widget>[
@@ -227,18 +268,17 @@ class _DashboardState extends State<Dashboard> {
                         onPressed: () {},
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: CircleAvatar(
-                          maxRadius: 18.0,
-                          backgroundColor: Colors.green,
+                          padding: EdgeInsets.all(10.0),
                           child: CircleAvatar(
-                          backgroundImage: NetworkImage("https://www.biography.com/.image/t_share/MTQ3NjM5ODU2MjA4NTUzMzQ4/iggy_azalea_photo_by_axeell_bauer-griffin_filmmagic_getty_469331242.jpg"),
-                          maxRadius: 15.0,
-                          backgroundColor: Colors.white,
-                          
-                        ),
-                        )
-                      )
+                            maxRadius: 18.0,
+                            backgroundColor: Colors.green,
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  "https://www.biography.com/.image/t_share/MTQ3NjM5ODU2MjA4NTUzMzQ4/iggy_azalea_photo_by_axeell_bauer-griffin_filmmagic_getty_469331242.jpg"),
+                              maxRadius: 15.0,
+                              backgroundColor: Colors.white,
+                            ),
+                          ))
                     ],
                   ),
                   body: Container(
